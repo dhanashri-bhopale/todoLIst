@@ -58,4 +58,16 @@ export class TodoComponent implements OnInit {
     this.todoArr.splice(getIndex, 1)
   }
 
+  cartCount: number = 0
+  onAdd(){
+    if(this.cartCount <= 10){
+      this.cartCount++
+    }
+  }
+
+  onDelete(){
+    if(this.cartCount > 0){
+      this.cartCount--
+    }
+  }
 }
