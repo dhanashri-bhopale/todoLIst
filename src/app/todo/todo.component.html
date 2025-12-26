@@ -7,12 +7,24 @@
           <div class="form-group">
             <input #todoItem required type="text" class="form-control" />
 
-            <button
+            <!-- <button
               (click)="onTodoAdd()"
               class="btn btn-block btn-primary mt-3"
             >
               Add TodoItem
-            </button>
+            </button> -->
+            <button 
+            (click)="onTodoAdd()"
+            *ngIf="!isInUpdateMode"
+            class="btn-block mt-3"
+            mat-raised-button color="primary">Add TodoItem</button>
+
+            <button 
+            (click)="onUpdate()"
+            *ngIf="isInUpdateMode"
+            class="btn-block mt-3"
+            mat-raised-button color="primary">Update TodoItem</button>
+
           </div>
         </div>
       </div>
@@ -26,7 +38,7 @@
           <h2>{{ todo.todoItem }}</h2>
 
           <div class="buttonn">
-            <button mat-mini-fab color="primary" class="mr-2">
+            <button (click)="onEdit(todo)" mat-mini-fab color="primary" class="mr-2">
               <mat-icon>edit</mat-icon>
             </button>
 
@@ -54,7 +66,7 @@
           <div class="click mb-4">
             <button
               class="mr-3"
-              (click)="onAdd()"
+              (click)="onCAdd()"
               [disabled]="cartCount >= 10"
               mat-raised-button
               color="primary"
@@ -62,7 +74,7 @@
               Add
             </button>
             <button 
-            (click)="onDelete()"
+            (click)="onCDelete()"
             [disabled]="cartCount === 0"
             mat-raised-button color="warn">Delete</button>
           </div>
@@ -77,4 +89,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
