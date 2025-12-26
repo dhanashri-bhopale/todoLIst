@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Itodo } from './module/todo';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-todo',
@@ -8,7 +9,9 @@ import { Itodo } from './module/todo';
 })
 export class TodoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _snackBar : MatSnackBar
+  ) {}
 
   ngOnInit(): void {
   }
@@ -47,6 +50,12 @@ export class TodoComponent implements OnInit {
     this.todoArr.push(todoObj)
     //create a new li
     
+    this._snackBar.open(`The Todo Item ID ${todoObj.todoId} Added Successfully`, 'close', {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      duration: 3000
+    })
+
     }
 
   }
@@ -60,6 +69,12 @@ export class TodoComponent implements OnInit {
 
     let getIndex = this.todoArr.findIndex(t => t.todoId === id)
     this.todoArr.splice(getIndex, 1)
+
+    this._snackBar.open(`The Todo Item ID ${id} Removed Successfully`, 'close', {
+      horizontalPosition:'right',
+      verticalPosition: 'bottom',
+      duration: 3000
+    })
   }
 
   editId!: string
@@ -84,6 +99,13 @@ export class TodoComponent implements OnInit {
       let getIndex = this.todoArr.findIndex(t => t.todoId === UPDATED_TODO.todoId)
 
       this.todoArr[getIndex] = UPDATED_TODO
+      this.isInUpdateMode = false
+
+      this._snackBar.open(`The Todo Item ID ${UPDATED_TODO.todoId} Updated Successfully`, 'close',{
+        horizontalPosition: 'right',
+        verticalPosition: 'bottom',
+        duration: 3000
+      })
     }
 
 
